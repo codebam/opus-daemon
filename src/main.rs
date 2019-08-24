@@ -35,11 +35,11 @@ fn read_config(opt: &Opt) -> config::Config {
 
     match opt.debug {
         Some(b) => { config.set("debug", b).unwrap(); },
-        None => {}
+        None => { config.set("debug", false).unwrap(); }
     }
     match opt.verbose {
         true => { config.set("verbose", true).unwrap(); },
-        _ => {}
+        _ => { config.set("verbose", false).unwrap(); }
     }
     match opt.watch_dir.as_ref().map(String::as_str) {
         Some(s) => { config.set("watch_dir", s).unwrap(); },
@@ -47,7 +47,7 @@ fn read_config(opt: &Opt) -> config::Config {
     }
     match opt.output_dir.as_ref().map(String::as_str) {
         Some(s) => { config.set("output_dir", s).unwrap(); },
-        None => {}
+        None => { config.set("output_dir", "output").unwrap(); }
     }
     // override config if command line args are set
     
